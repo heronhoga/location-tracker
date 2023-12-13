@@ -26,9 +26,10 @@ void setup()
 void loop()
 {
   while (gpsSerial.available() > 0)
-    if (gps.encode(gpsSerial.read()))
+    if (gps.encode(gpsSerial.read())) {
       displayInfo();
-
+      delay(5000);
+    }
   if (millis() > 5000 && gps.charsProcessed() < 10)
   {
     Serial.println("No GPS detected");
@@ -46,6 +47,12 @@ void displayInfo()
     Serial.println(gps.location.lng(), 6);
     Serial.print("Altitude: ");
     Serial.println(gps.altitude.meters());
+    Serial.println("Google maps:");
+    Serial.print("https://www.google.com/maps/search/?api=1&query=");
+    Serial.print(gps.location.lat(), 6); // Print latitude with 6 decimal places
+    Serial.print("%2C");
+    Serial.println(gps.location.lng(), 6);
+
     lcd.setCursor(0, 0);
     lcd.print("Wazzup dice!");
     lcd.setCursor(0, 1);
