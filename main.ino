@@ -86,10 +86,14 @@ void displayInfo()
     Serial.print(gps.location.lat(), 6); // Print latitude with 6 decimal places
     Serial.print("%2C");
     Serial.println(gps.location.lng(), 6);
+    lcd.setCursor(6, 1);
+    lcd.print("Found");
   }
   else
   {
     Serial.println("Location: Not Available");
+    lcd.setCursor(6, 1);
+    lcd.print("Loc?");
   }
   
   Serial.print("Date: ");
